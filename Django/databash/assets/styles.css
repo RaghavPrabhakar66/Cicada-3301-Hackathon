@@ -1,0 +1,62 @@
+body {
+    background-color: #181818;
+    /* background-image: url(./images/Screenshot\ 2021-05-28\ 135309.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%; */
+}
+
+
+/* lANDING PAGE */
+/* navbar settings */
+.navbar-custom{
+    background-color: #181818;
+}
+.dropdown-item:active{
+    background-color:grey;
+}
+
+
+/* about databash */
+.header-div-left{
+    padding-top: 10%;
+    padding-left: 4%;    
+}
+.header-div-right{
+    padding-top:5%;
+    padding-left: 5%;
+}
+.header-div-main{
+    color: white;
+    margin-top: 8px;
+    font-size: 700%;
+}
+.header-div-para{
+    color: white;
+}
+
+
+/* about our team */
+.team-list{
+    color: aqua;
+    
+}
+
+
+/* SIGN UP PAGE */
+.form-list-si{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.form-label-si{
+    color: white;
+}
+
+
+/* LOG IN PAGE */
+.form-list-li{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.form-label-li{
+    color: white;
+}
