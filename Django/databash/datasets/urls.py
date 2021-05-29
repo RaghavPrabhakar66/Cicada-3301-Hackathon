@@ -6,4 +6,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('datasets/', views.datasets , name='datasets'),
+    path('create/', views.createDataset, name='create'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
