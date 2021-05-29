@@ -75,6 +75,9 @@ body {
 
 
 /* dataset page */
+.col-md-3{
+    padding-bottom: 1%;
+}
 .card{
     transition: all 0.2s ease;
     cursor: pointer
