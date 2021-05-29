@@ -4,4 +4,4 @@ from .models import Dataset
 class DatasetCreationForm(forms.Form):
     class Meta:
         model = Dataset
-        fields = ['name', 'description', 'columns', 'schema']l
+        fields = ['name', 'description', 'columns']

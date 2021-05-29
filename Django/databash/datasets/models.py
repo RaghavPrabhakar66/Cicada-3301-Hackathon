@@ -6,15 +6,15 @@ from django import forms
 class Dataset(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    columns = models.IntegerField() # add validator limt 10
+    columns = models.IntegerField(choices=((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'), (6, '6'), (7, '7'), (8, '8'), (9, '9'), (10, '10')))
     data = models.FileField()
     description = models.TextField(max_length=5000)
     stars = models.IntegerField(default=0)
-    
+
 class Attribute(models.Model):
-    dataset = models.ForeignKey(Dataset)
-    name = models.CharField()
-    datatype = models.CharField()
+    dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    datatype = models.CharField(max_length=200)
 
 
 
