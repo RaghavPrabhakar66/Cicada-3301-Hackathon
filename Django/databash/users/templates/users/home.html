@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% block content %}
+{% load static %}
 
 
     <!--heading-->
@@ -8,19 +9,18 @@
             <div class="header-div-left col-lg-6">
                 <h1 class="display-1 header-div-main text-justify">DataBash</h1>
                 <span class="header-div-para text-justify">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type
-                specimen book.
+                    We at DataBash are making a crowdsourcing based Dataset collection platform.
+                    A user can request for any dataset and people can donate their photos. People
+                    will get rewarded for the data they will donate. Data Scientists can now focus
+                    on making beautiful models without worrying about the data required.
                 </span>
             </div>
-
             <div class="header-div-right col-lg-6">
-                <img src="../img/giphy.gif" alt="nope">
+                <img src="{% static 'giphy.gif' %}" alt="nope">
             </div>
         </div>
     </div>
-
+    
 
     <!--Leaderboard-->
     <div class="container-fluid">

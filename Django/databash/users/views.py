@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from datasets.models import Dataset
+
 
 def home(request):
     return render(request,'users/home.html')
@@ -29,11 +32,14 @@ def profile(request):
 
 
 def stars(request):
-    return render(request, 'users/starred.html')
+    current_user = request.user
+    return render(request, 'users/starred.html', {'current_user': current_user})
 
 def contributions(request):
     return render(request, 'users/myContri.html')
 
 def leaderboard(request):
-    
-    return render(request, 'users/leaderboard.html')
+    datasets = Dataset.objects.all().order_by('-stars')
+    user = get_user_model()
+    leaders = user.objects.all().order_by('-xp')
+    return render(request, 'users/leaderboard.html', {'leaders': leaders, 'datasets': datasets})

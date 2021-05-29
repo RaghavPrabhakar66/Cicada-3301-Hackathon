@@ -75,6 +75,10 @@ body {
 
 
 /* dataset page */
+.bottom-star{
+    left: 0;
+    bottom: 0;
+}
 .col-md-3{
     padding-bottom: 1%;
 }

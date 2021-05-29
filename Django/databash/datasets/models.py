@@ -6,14 +6,19 @@ from django import forms
 class Dataset(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    columns = models.IntegerField(choices=((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')))
+    data = models.FileField(blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+    integer = models.IntegerField(blank=True, null=True)
+    columns = models.IntegerField(choices=[(3, 3)])
+    spam = models.BooleanField(default=False)
+    # selected = models.IntegerField(blank=True, null=True)
     description = models.TextField(max_length=5000)
     stars = models.IntegerField(default=0)
 
-# class Attribute(models.Model):
-#     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=200)
-#     datatype = models.CharField(max_length=200)
+class Attribute(models.Model):
+    dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    datatype = models.CharField(max_length=200)
 
 # class column_2(models.Model):
 #     c1 = models.CharField(max_length=200, null=True, blank=True)
@@ -21,13 +26,13 @@ class Dataset(models.Model):
 #     datatype_c1 = models.CharField(choices=['image', 'text', 'integer'])
 #     datatype_c2 = models.CharField(choices=['image', 'text', 'integer'])
 
-# class column_3(models.Model):
-#     c1 = models.CharField(max_length=200, null=True, blank=True)
-#     c2 = models.CharField(max_length=200, null=True, blank=True)
-#     c3 = models.CharField(max_length=200, null=True, blank=True)
-#     datatype_c1 = models.CharField(choices=['image', 'text', 'integer'])
-#     datatype_c2 = models.CharField(choices=['image', 'text', 'integer'])
-#     datatype_c3 = models.CharField(choices=['image', 'text', 'integer'])   
+class column_3(forms.ModelForm):
+    c1 = models.CharField(max_length=200, null=True, blank=True)
+    c2 = models.CharField(max_length=200, null=True, blank=True)
+    c3 = models.CharField(max_length=200, null=True, blank=True)
+    datatype_c1 = models.CharField(choices=(('image', 'image'), ('text', 'text'), ('integer', 'integer')))
+    datatype_c2 = models.CharField(choices=(('image', 'image'), ('text', 'text'), ('integer', 'integer')))
+    datatype_c3 = models.CharField(choices=(('image', 'image'), ('text', 'text'), ('integer', 'integer')))
 
 # class column_4(models.Model):
 #     c1 = models.CharField(max_length=200, null=True, blank=True)
