@@ -1,5 +1,6 @@
 {% extends 'users/base.html' %}
 {% block content %}
+{% load static %}
 
 
     <!--heading-->
@@ -16,7 +17,7 @@
             </div>
 
             <div class="header-div-right col-lg-6">
-                <img src="../img/giphy.gif" alt="nope">
+                <img src="{% static 'giphy.gif' %}" alt="nope">
             </div>
         </div>
     </div>
