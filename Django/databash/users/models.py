@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datasets.models import Dataset
+from datasets.models import Dataset, Contribution
 
 
 class User(AbstractUser):
@@ -10,3 +10,4 @@ class User(AbstractUser):
     xp = models.IntegerField(default=0)
     rank = models.IntegerField(default=0)
     stars = models.ManyToManyField(Dataset)
+    contributions = models.ManyToManyField(Contribution)
