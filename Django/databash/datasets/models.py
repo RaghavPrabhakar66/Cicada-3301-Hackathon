@@ -16,7 +16,6 @@ class Dataset(models.Model):
 #     datatype = models.CharField(max_length=200)
 
 # class column_2(models.Model):
-    
 #     c1 = models.CharField(max_length=200, null=True, blank=True)
 #     c2 = models.CharField(max_length=200, null=True, blank=True)
 #     datatype_c1 = models.CharField(choices=['image', 'text', 'integer'])
