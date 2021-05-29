@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 
 def home(request):
-    return render(request,'users/index.html')
+    return render(request,'users/home.html')
 
 
 def signup(request):
@@ -35,4 +35,5 @@ def contributions(request):
     return render(request, 'users/myContri.html')
 
 def leaderboard(request):
+    
     return render(request, 'users/leaderboard.html')
