@@ -1,27 +1,15 @@
-from sentence_transformers import SentenceTransformer
 from transformers import logging
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
 logging.set_verbosity_error()
 
-class TextFilter:
-    def __init__(self, threshold=0.45):
-        self.model = SentenceTransformer('bert-base-nli-mean-tokens')
-        self.threshold = threshold
-    
     def run(self, path, text):
         storedEmbeds = np.load(path)
         textEmbeds = self.model.encode([text])
         probs = cosine_similarity(storedEmbeds, textEmbeds)
         return True if probs.item(0) > self.threshold else False
     
-    def generateFilter(self, textList, path):
-        textEmbeds = self.model.encode(textList)
-        meanEmbeds = np.mean(textEmbeds, axis=0)[np.newaxis, :]
-        np.save(path, meanEmbeds)
-        return meanEmbeds
-
 
 if __name__ == '__main__':
     sentences = [
