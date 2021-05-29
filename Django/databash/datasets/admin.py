@@ -9,8 +9,8 @@ from . import models
 
 class DatasetAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'owner', 'data', 'description', 'stars')
-    list_filter = ('owner', 'id', 'owner', 'data', 'description', 'stars')
+    list_display = ('id', 'owner', 'description', 'stars')
+    list_filter = ('owner', 'id', 'owner', 'description', 'stars')
 
 
 def _register(model, admin_class):
