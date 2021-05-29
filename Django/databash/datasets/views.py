@@ -1,11 +1,9 @@
-from django.shortcuts import redirect, render
-# from .models import Dataset
-from .DL.text import TextFilter
+from django.shortcuts import redirect, render, get_object_or_404
+from .models import Dataset
 import os
-from django.conf import settings
-from pandas import DataFrame
-# from .forms import DatasetCreationForm
+from .forms import DatasetCreationForm, ContributionForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -13,31 +11,34 @@ def datasets(request):
     datasets = Dataset.objects.all().order_by('-stars')
     return render(request, 'dataset.html', {'datasets': datasets})
 
+
+@login_required
 def createDataset(request):
-    form = DatasetCreationForm(request.POST)
-    if form.is_valid():
+    if request.method=='POST':
+        form = DatasetCreationForm(request.POST, user=request.user)
+        if form.is_valid():
             form.save()
-            messages.success(request, f'Your account has been created! You are now able to log in')
+            messages.success(request, f'Your dataset has been created!')
             return redirect('home')
-    return render(request, 'createDataset.html')
+    else:
+        form = DatasetCreationForm(user=request.user)
+        
+    return render(request, 'createDataset.html', {'form': form})
 
-# Return True if given text is spam
-def checkSpam(path, text):
-    filter = TextFilter()
-    return filter.run(path, text)
 
-# Genereate spam filter, given a list of texts
-def makeFilter(column, path):
-    df = DataFrame()
-    df.read_csv(path)
-    texts = df.iloc[column-1:column]
-    filter = TextFilter()
-    filter.generateFilter(path, texts)
-    return
+def explore(request, dataset_id):
+    dataset = get_object_or_404(Dataset, pk=dataset_id)
+    return render(request, 'explore.html', {'dataset': dataset})
 
-# Append given data in given csv file
-def commitContribution(data, path='./storage/sentiment.csv'):
-    df = DataFrame()
-    df.read_csv(path)
-    df.append(data)
-    df.to_csv(path)
+
+def contribute(request, dataset_id):
+    if request.method=='POST':
+        form = ContributionForm(request.POST, user=request.user, dataset = Dataset.objects.get(id=dataset_id))
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your contribution has been given!')
+            return redirect('home')
+    else:
+        form = ContributionForm(user=request.user, dataset = Dataset.objects.get(id=dataset_id))
+        
+    return render(request, 'contribute.html', {'form': form})
