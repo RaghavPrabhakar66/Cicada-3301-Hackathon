@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="container-fluid form-list-li">
+    <div class="mb-3">
+        <form method="POST" style="color: aliceblue;">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Contribute to dataset</legend>
+              {{ form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Contribute</button>
+          </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

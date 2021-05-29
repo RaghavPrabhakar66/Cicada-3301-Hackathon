@@ -10,7 +10,10 @@ from datasets.models import Dataset
 
 
 def home(request):
-    return render(request,'users/home.html')
+    datasets = Dataset.objects.all().order_by('-stars')[:5]
+    user = get_user_model()
+    leaders = user.objects.all().order_by('-xp')[:5]
+    return render(request,'users/home.html', {'leaders': leaders, 'datasets': datasets})
 
 
 def signup(request):
@@ -20,7 +23,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('login')
+            return redirect('home')
     else:
         form = UserRegisterForm()
     return render(request, 'users/signIn.html', {'form': form})
@@ -43,3 +46,8 @@ def leaderboard(request):
     user = get_user_model()
     leaders = user.objects.all().order_by('-xp')
     return render(request, 'users/leaderboard.html', {'leaders': leaders, 'datasets': datasets})
+
+def mycontris(request):
+    current_user = request.user
+    datasets = current_user.contributions.dataset
+    return render(request, 'myContri.html', {'datasets': datasets})

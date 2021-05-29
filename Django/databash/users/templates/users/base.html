@@ -52,6 +52,12 @@
                           <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
                         </ul>
                       </li>
+                    <li class="nav-item">
+                      <a class="nav-link position-absolute top-50 end-0 translate-middle-y" href="#" style="padding-right: 200px;">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-absolute top-50 end-0 translate-middle-y" href="#" style="padding-right: 100px;">Rank:{{user.rank}}</a>
+                    </li>
                       {% else %}
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">Get Started</a>

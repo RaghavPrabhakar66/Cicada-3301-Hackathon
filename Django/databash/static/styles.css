@@ -89,3 +89,17 @@ body {
 .card:hover {
     transform: scale(1.1)
 }
+a.card-text,
+a.card-text:hover {
+  color: black;
+  text-decoration: none;
+}
+
+
+/* explore */
+.jumbotron{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}

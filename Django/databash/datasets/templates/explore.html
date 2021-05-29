@@ -1,30 +1,30 @@
-{% extends 'users/base.html' %}
+{% extends "users/base.html" %}
 {% block content %}
-    
-    <!--heading-->
-    <div class="container-fluid" style="padding: 1% 1% 1% 1%;">
-        <p class="h1 top-header">Starred Datasets</p>
-    </div>
+{% load static %}
 
-    <!--dataset cards-->
-    <div class="container-fluid">
-        <div class="row">
-            {% for star in current_user.stars.all %}
-            <div class="col-md-3">
-                <div class="card" style="background-color: #121415 ; color: white;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{star.name}}</h5>
-                        <p class="card-text">{{star.description}}</p>
-                        <a href="#" class="btn btn-primary">Unstar</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+
+<div class="jumbotron" style="color: white;">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">{{dataset.name}}</h1>
         </div>
+        {% if request.user.is_authenticated %}
+        <div class="col-md-6">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href={% url 'contribute' dataset.id %} role="button">Contribute</a>
+                    <a class="btn btn-primary btn-lg" href="{% static './storage/sentiment.csv' %}" role="button">Download</a>
+                </p>
+            </div>
+        </div>
+        {% else %}
+
+        {% endif %}
     </div>
-
-
-
+    <!-- <p class="lead">This is a dataset about cars and all kinds of cars, enjoy!!</p> -->
+    <hr class="my-4">
+    <p>{{ dataset.description }}</p>
+</div>
     
     <!-- Optional JavaScript; choose one of the two! -->
 
