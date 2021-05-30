@@ -13,7 +13,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <p class="lead">
                     <a class="btn btn-primary btn-lg" href={% url 'contribute' dataset.id %} role="button">Contribute</a>
-                    <a class="btn btn-primary btn-lg" href="{% static './storage/sentiment.csv' %}" role="button">Download</a>
+                    <a class="btn btn-primary btn-lg" href={% static 'Storage/sentiment.csv' %} role="button">Download</a>
                 </p>
             </div>
         </div>
