@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django import forms
 from django.db.models.signals import post_save
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 import os
@@ -28,9 +28,8 @@ def makeFilter(column, path):
 
 # Append given data in given csv file
 def commitContribution(data, path):
-    print('cunts say hi from csv')
     with open(path, 'a') as f:
-        f.write(f"\n\"{str(data[0])}\", {str(data[1])}\n")
+        f.write(f"\"{str(data[0])}\", {str(data[1])}\n")
 
 
 # Create your models here.
@@ -60,32 +59,25 @@ class Contribution(models.Model):
 # @receiver(post_save, sender=Dataset)
 # def create_filter(sender, instance, created, *args, **kwargs):
 #     if created:
-#         makeFilter(column=1, path=os.path.join(settings.BASE_DIR, 'datasets/Storage/filter.npy'))
+#         makeFilter(column=1, path=os.path.join(settings.BASE_DIR, 'static/Storage/filter.npy'))
 
 def user_contribution_counter(instance):
-    print("hello there")
     instance.sender.contributions.add(instance)
     xp = instance.sender.xp
     xp += 100
 
 def contri(sender, instance, *args, **kwargs):
-    print("sexy sex sextime")
-    spam = checkSpam(os.path.join(settings.BASE_DIR, 'datasets/Storage/filter.npy'), instance.textinput)
+    spam = checkSpam(os.path.join(settings.BASE_DIR, 'static/Storage/filter.npy'), instance.textinput)
     if (spam):
         instance.isSpam = True
-        print("penis very large: (It is spamu)")
-        return HttpResponse("yayy it doesnt work")
     else:
-        print("penis very small")
-        # instance.save()
         commit_contri(instance)
         user_contribution_counter(instance)
 
 post_save.connect(contri, sender=Contribution)    
 
 def commit_contri(instance):
-    print('cunts get their share')
-    commitContribution([instance.textinput, instance.intinput], path=os.path.join(settings.BASE_DIR, 'datasets/Storage/sentiment.csv'))
+    commitContribution([instance.textinput, instance.intinput], path=os.path.join(settings.BASE_DIR, 'static/Storage/sentiment.csv'))
 
 
 class column_3(forms.ModelForm):

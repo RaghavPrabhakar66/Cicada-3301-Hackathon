@@ -37,7 +37,7 @@ def contribute(request, dataset_id):
         if form.is_valid():
             form.save()
             messages.success(request, f'Your contribution has been given!')
-            return redirect('home')
+            return redirect('datasets')
     else:
         form = ContributionForm(user=request.user, dataset = Dataset.objects.get(id=dataset_id))
         
